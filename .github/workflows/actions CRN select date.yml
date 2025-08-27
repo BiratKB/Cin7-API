@@ -3,7 +3,7 @@ name:  run Select_Date_CRN.py
 on:
   workflow_dispatch:
  # schedule:
-  #  - cron: '0 3 * * 6,0,1' # At 03:00, Monday  (La hora depende de la localización del servidor)
+  #  - cron: '0 3 * * 6,0,1' # At 03:00, Monday  (Hour dependant on server location)
 
 jobs:
   build:
