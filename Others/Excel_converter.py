@@ -1,7 +1,9 @@
+# I convert the Invoicing Book to a non binary excel so I can automate the refresh in Power Bi
 import os
 import requests
 import io
 import pandas as pd
+import logging
 
 dropbox_url = os.environ.get("INVOICING_BOOK_URL")
 if not dropbox_url:
@@ -23,11 +25,20 @@ with pd.ExcelWriter(output_file) as writer:
         df = xlsb.parse(sheet_name=sheet, header=None)
         df.to_excel(writer, sheet_name=sheet, index=False, header=False)
 
-# Write the output filename to the GitHub Actions environment file
-env_file_path = os.getenv('GITHUB_ENV')
-if env_file_path:
-    with open(env_file_path, "a") as env_file:
-        env_file.write(f"ENV_CUSTOM_DATE_FILE={output_file}\n")
+logging.info(f"Excel successfully written locally at {output_file}")
+
+# Export the EXACT path for the workflow
+gh_env = os.getenv('GITHUB_ENV')
+output_file_abs = os.path.abspath(output_file)
+output_file_base = os.path.basename(output_file)
+
+if gh_env:
+    with open(gh_env, "a") as env_file:
+        env_file.write(f"ENV_CUSTOM_DATE_FILE={output_file_abs}\n")
+        env_file.write(f"ENV_CUSTOM_DATE_FILE_NAME={output_file_base}\n")
+
+    logging.info(f"Exported ENV_CUSTOM_DATE_FILE={output_file_abs}")
+    logging.info(f"Exported ENV_CUSTOM_DATE_FILE_NAME={output_file_base}")
 else:
-    # Fallback: print filename if GITHUB_ENV is not set (e.g., local run)
-    print(output_file)
+    logging.warning("GITHUB_ENV not set; cannot export ENV_CUSTOM_DATE_FILE.")
+    print(output_file_abs)
