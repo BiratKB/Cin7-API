@@ -157,20 +157,40 @@ def main():
     fieldnames = ['sourceUser', 'reference', 'company', 'currencyCode', 'lineItemcode', 'lineItemName', 'status', 'Stage', 'lineItemQty', 'createdDate', 'estimatedDeliveryDate', 'fullyReceivedDate']
     file_name = "purchase_orders_LY.csv"
 
+     # Saves it in a temporal file 
+    output_filename = os.path.join("tmp_files", file_name)
+    os.makedirs("tmp_files", exist_ok=True)
     all_purchase_orders = []
+
+    # Process users in parallel
     with ThreadPoolExecutor(max_workers=4) as executor:
         results = executor.map(process_user, USERS)
         for user_purchase_orders in results:
             all_purchase_orders.extend(user_purchase_orders)
 
-    with open(file_name, mode='w', newline='', encoding='utf-8') as csv_file:
+    # Write all purchase orders to a single CSV file
+    with open(output_filename, mode='w', newline='', encoding='utf-8') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
         for purchase_order in all_purchase_orders:
             writer.writerow(purchase_order)
 
     logging.info(f"Data successfully written to {file_name}")
+    # Export the EXACT path for the workflow
+    gh_env = os.getenv('GITHUB_ENV')
+    output_filename_abs = os.path.abspath(output_filename) 
+    output_filename_base = os.path.basename(output_filename)
 
+    if gh_env:
+        with open(gh_env, "a") as env_file:
+            env_file.write(f"ENV_CUSTOM_DATE_FILE={output_filename_abs}\n")       
+            env_file.write(f"ENV_CUSTOM_DATE_FILE_NAME={output_filename_base}\n")
+
+        logging.info(f"Exported ENV_CUSTOM_DATE_FILE={output_filename_abs}")
+        logging.info(f"Exported ENV_CUSTOM_DATE_FILE_NAME={output_filename_base}")
+
+    else:
+        logging.warning("GITHUB_ENV not set; cannot export ENV_CUSTOM_DATE_FILE.")
 
 if __name__ == "__main__":
     main()

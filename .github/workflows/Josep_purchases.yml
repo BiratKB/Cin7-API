@@ -2,8 +2,8 @@ name:  run Josep_purchases.py
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '30 6 * * 1-5' # At 04:00, Monday-Firday(La hora depende de la localización del servidor)
+#  schedule:
+   # - cron: '30 6 * * 1-5' # At 04:00, Monday-Firday(La hora depende de la localización del servidor)
 
 jobs:
   build:

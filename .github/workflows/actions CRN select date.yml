@@ -3,7 +3,7 @@ name:  run Select_Date_CRN.py
 on:
   workflow_dispatch:
  # schedule:
-  #  - cron: '0 3 * * 6,0,1' # At 03:00, Monday  (Hour dependant on server location)
+  #  - cron: '0 3 * * 6,0,1' # At 03:00, Monday  (La hora depende de la localización del servidor)
 
 jobs:
   build:
@@ -30,12 +30,14 @@ jobs:
           ARNL_KEY: ${{ secrets.ARNL_KEY }}
           ARF_KEY: ${{ secrets.ARF_KEY }}
         run: python Credit_Notes/Select_Date_CRN.py
+      - name: Debug ENV
+        run: echo "ENV_CUSTOM_DATE_FILE=${{ env.ENV_CUSTOM_DATE_FILE }}"
 
       - name: Upload File to Dropbox
         uses: ./upload-dropbox-action
         with:
-          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
-          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
-          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
-          SOURCE_PATH: ${{env.ENV_CUSTOM_DATE_FILE}}
-          DEST_PATH: /carpeta_de_prueba/${{env.ENV_CUSTOM_DATE_FILE}}
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_ALL_ACCESS_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_ALL_ACCESS_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_ALL_ACCESS_REFRESH_TOKEN }}
+          SOURCE_PATH: tmp_files/${{ env.ENV_CUSTOM_DATE_FILE_NAME }}
+          DEST_PATH: /Power BI Data Warehouse/CIn7 Data/API/${{ env.ENV_CUSTOM_DATE_FILE_NAME }}
