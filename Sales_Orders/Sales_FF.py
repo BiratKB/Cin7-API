@@ -13,7 +13,7 @@ from concurrent.futures import ThreadPoolExecutor
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 #API config
-BASE_URL = 'https:api.cin7.com/api/v1/SalesOrders'
+BASE_URL = 'https://api.cin7.com/api/v1/SalesOrders'
 FIELDS = 'id, reference, customerOrderNo, salesReference, invoiceDate, estimatedDeliveryDate, company, firstName,' \
 'lastName, projectName, source, currencyCode, currencyRate, lineItems, discountTotal, completedDate, invoiceNumber'
 ROWS_PER_PAGE = 250
