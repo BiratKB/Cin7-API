@@ -39,4 +39,4 @@ jobs:
                   DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_ALL_ACCESS_APP_SECRET }}
                   DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_ALL_ACCESS_REFRESH_TOKEN }}
                   SOURCE_PATH: tmp_files/${{ env.ENV_CUSTOM_DATE_FILE_NAME }}
-                  DEST_PATH: /Power BI Data Warehouse/CIn7 Data/API/SO_Friday${{ env.ENV_CUSTOM_DATE_FILE_NAME }}
+                  DEST_PATH: /Power BI Data Warehouse/CIn7 Data/API/SO_Friday/${{ env.ENV_CUSTOM_DATE_FILE_NAME }}
