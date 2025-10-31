@@ -203,7 +203,7 @@ def main():
     #All in 1 csv
     with open(output_filename, mode='w', newline='', encoding='utf-8') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        writer.writerheader()
+        writer.writeheader()
         for credit_note in all_credit_notes:
             writer.writerow(credit_note)
     
