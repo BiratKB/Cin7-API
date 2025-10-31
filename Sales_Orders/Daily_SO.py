@@ -6,6 +6,7 @@ import csv
 from dateutil import parser
 import pytz
 import logging
+import traceback
 import os
 errores_globales = []
 from concurrent.futures import ThreadPoolExecutor
@@ -180,8 +181,10 @@ def process_user(user):
                     'user': user['username'],
                     'order_id': sales_orders.get('id'),
                     'reference': sales_orders.get('reference'),
-                    'error': str(e),
-                    'timestamp': datetime.datetime.utcnow().isoformat()
+                    'error': f"{type(e).__name__}: {e}",
+                    'invoice_date': sales_orders.get('invoiceDate'),
+                    'traceback': traceback.format_exc(),
+                    'timestamp': datetime.datetime.now(datetime.timezone.utc).isoformat()
     })
 
         logging.info(f"Page {page} processed for user {user['username']}.")
@@ -221,7 +224,7 @@ def main():
         # Write errors to a CSV file (always create it)
     errores_filename = "errores_sales_orders.csv"
     with open(errores_filename, mode='w', newline='', encoding='utf-8') as error_file:
-        fieldnames = ["user", "order_id", "reference", "error", "timestamp"]
+        fieldnames = ["user", "order_id", "reference", "error", "invoice_date", "traceback", "timestamp"]
         writer = csv.DictWriter(error_file, fieldnames=fieldnames)
         writer.writeheader()
         for err in errores_globales:

@@ -1,4 +1,4 @@
-name:  run Sales_FF.py
+name:  run CRN_FF.py
 
 on:
   workflow_dispatch:
@@ -30,7 +30,7 @@ jobs:
           ARL_KEY: ${{ secrets.ARL_KEY }}
           ARNL_KEY: ${{ secrets.ARNL_KEY }}
           ARF_KEY: ${{ secrets.ARF_KEY }}
-        run: python Sales_Orders/Sales_FF.py
+        run: python Credit_Notes/CRN_FF.py
 
       - name: Upload File to Dropbox
         uses: ./upload-dropbox-action
