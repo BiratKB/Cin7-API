@@ -122,7 +122,7 @@ def process_credit_note(credit_note, user_name):
         adjusted_discount_total = round((discount_total / num_products) * currency_rate, 2)
 
         results.append({
-            'sourceuser': abbreviated_user_name,
+            'sourceUser': abbreviated_user_name,
             'reference': credit_note.get('reference'),
             'creditNoteNumber': credit_note.get('creditNoteNumber'),
             'salesReference': credit_note.get('salesReference'),
