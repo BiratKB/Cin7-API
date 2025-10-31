@@ -15,8 +15,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 #API config setup
 BASE_URL = 'https://api.cin7.com/api/v1/CreditNotes'
-FIELDS = 'id, reference, creditNoteNumber, salesReference, createdDate, company, firstName, lastName,' \
-'projectName, source, currencyCode, currencyRate, lineItems, discountTotal, completedDate, invoiceNumber'
+FIELDS = 'id, reference, creditNoteNumber, salesReference, createdDate, company, firstName, lastName,projectName, source, currencyCode, currencyRate, lineItems, discountTotal, completedDate, invoiceNumber'
 ROWS_PER_PAGE = 250
 
 #Get API Key
