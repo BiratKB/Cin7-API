@@ -201,7 +201,7 @@ def main():
             all_credit_notes.extend(user_credit_notes)
 
     #All in 1 csv
-    with open(output_filename, mode='w', newline='', encoding='utf9-8') as csv_file:
+    with open(output_filename, mode='w', newline='', encoding='utf-8') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writerheader()
         for credit_note in all_credit_notes:
