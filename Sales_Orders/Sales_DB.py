@@ -162,10 +162,11 @@ def main():
         'Created Date',
         'Branch ID',
         'Project Name',
+        'Currency Name',
         'Item Code',
         'Item Qty',
         'Item Price',
-        'Item Price 3',
+        'Item Option 3',
         'Direct Order'
     ]
 
