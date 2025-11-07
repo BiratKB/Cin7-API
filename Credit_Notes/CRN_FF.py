@@ -147,7 +147,7 @@ def process_credit_note(credit_note, user_name):
 
 #Def process user (entities)
 def process_user(user):
-    headers = get_auth_header(user['username'], user['key'])
+    headers = get_auth_header(user['username'], user['key']) 
     start_date, end_date = calculate_date_range()
     all_credit_notes = []
     page = 1
