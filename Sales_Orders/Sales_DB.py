@@ -37,14 +37,68 @@ def get_auth_header(username, key):
     encoded_credentials = base64.b64encode(credentials.encode('utf-8')).decode('utf-8')
     return {'Authorization': f'Basic {encoded_credentials}', 'Content-Type': 'application/json'}
 
-#API call function
-def call_api(url, headers):
-    try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        return response.json(), None
-    except requests.RequestException as e:
-        return None, str(e)
+#API call function with retry for error
+
+def call_api(url, headers, max_retries=5, base_delay=1):
+    """
+    Calls the given API URL with retries and exponential backoff.
+    Retries on 429 (Too Many Requests) or 5xx errors.
+
+    Args:
+        url (str): API endpoint to call.
+        headers (dict): Headers to include in the request.
+        max_retries (int): Maximum retry attempts before failing.
+        base_delay (int): Base delay in seconds for exponential backoff.
+
+    Returns:
+        tuple: (json_data, error_message)
+    """
+    for attempt in range(max_retries):
+        try:
+            response = requests.get(url, headers=headers)
+
+            # Handle rate limit (429) explicitly
+            if response.status_code == 429:
+                wait_time = base_delay * (2 ** attempt)  # Exponential backoff
+                logging.warning(
+                    f"Rate limit hit (429) on attempt {attempt + 1}/{max_retries}. "
+                    f"Retrying in {wait_time}s..."
+                )
+
+                # Optionally use 'Retry-After' header if Cin7 provides it
+                retry_after = response.headers.get("Retry-After")
+                if retry_after and retry_after.isdigit():
+                    wait_time = int(retry_after)
+
+                time.sleep(wait_time)
+                continue  # retry the request
+
+            # Retry on server errors (5xx)
+            if 500 <= response.status_code < 600:
+                wait_time = base_delay * (2 ** attempt)
+                logging.warning(
+                    f"Server error {response.status_code} on attempt {attempt + 1}/{max_retries}. "
+                    f"Retrying in {wait_time}s..."
+                )
+                time.sleep(wait_time)
+                continue
+
+            # Success: no errors
+            response.raise_for_status()
+            return response.json(), None
+
+        except requests.RequestException as e:
+            wait_time = base_delay * (2 ** attempt)
+            logging.warning(
+                f"Request error on attempt {attempt + 1}/{max_retries}: {e}. "
+                f"Retrying in {wait_time}s..."
+            )
+            time.sleep(wait_time)
+
+    # If all retries failed
+    error_message = f"Failed after {max_retries} attempts: {url}"
+    logging.error(error_message)
+    return None, error_message
     
 #Parse date function
 def parse_date(date_string):
