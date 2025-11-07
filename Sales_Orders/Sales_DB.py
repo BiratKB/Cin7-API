@@ -71,8 +71,9 @@ def parse_date(date_string):
 def calculate_date_range():
     today = datetime.datetime.now(pytz.utc)
     this_monday = today - datetime.timedelta(days=today.weekday())
+    this_monday = this_monday.replace(hour=0, minute=0, second=0, microsecond=0)
     start_dt = (this_monday - datetime.timedelta(weeks=1)).replace(hour=0, minute=0, second=0, microsecond=0)
-    end_dt = (this_monday - datetime.timedelta(seconds=1)).replace(hour=23, minute=59, second=0, microsecond=0)
+    end_dt = (this_monday - datetime.timedelta(seconds=1)).replace(hour=23, minute=59, second=59, microsecond=999999)
     return start_dt, end_dt
 
 #Check valid orders : no Void and created within last week 
