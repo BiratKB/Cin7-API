@@ -31,11 +31,21 @@ jobs:
           ARF_KEY: ${{ secrets.ARF_KEY }}
         run: python Sales_Orders/Sales_DB.py
 
-      - name: Upload File to Dropbox
-        uses: ./upload-dropbox-action
-        with:
-                  DROPBOX_APP_KEY: ${{ secrets.DROPBOX_ALL_ACCESS_APP_KEY }}
-                  DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_ALL_ACCESS_APP_SECRET }}
-                  DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_ALL_ACCESS_REFRESH_TOKEN }}
-                  SOURCE_PATH: tmp_files/*.csv
-                  DEST_PATH: /Power BI Data Warehouse/CIn7 Data/API/Sales_DB_Monday/
+      - name: Upload all Files to Dropbox
+        run: |
+            echo "Starting Dropbox uploads..."
+            for file in tmp_files/*.csv; do
+                if [ -f "$file" ]; then
+                    echo "Uploading $file..."
+                    gh workflow run ./upload-dropbox-action \
+                        --app-key "${{ secrets.DROPBOX_ALL_ACCESS_APP_KEY }}" \
+                        --app-secret "${{ secrets.DROPBOX_ALL_ACCESS_APP_SECRET }}" \
+                        --refresh-token "${{ secrets.DROPBOX_ALL_ACCESS_REFRESH_TOKEN }}" \
+                        --source "$file" \
+                        --dest "/Power BI Data Warehouse/CIn7 Data/API/Sales_DB_Monday/$(basename "$file")"
+                else
+                    echo "No CSV files find in tmp_files/"
+                    exit 1
+                fi
+            done
+        shell: bash
