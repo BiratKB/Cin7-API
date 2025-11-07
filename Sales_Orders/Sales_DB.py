@@ -174,7 +174,7 @@ def main():
     os.makedirs("tmp_files", exist_ok=True)
 
     #Process users in parallel
-    with ThreadPoolExecutor(max_workers=4) as executor:
+    with ThreadPoolExecutor(max_workers=2) as executor:
         results = executor.map(process_user, USERS)
 
         #Write one CSV per user
