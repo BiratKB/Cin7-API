@@ -3,6 +3,7 @@ import requests
 import base64
 import datetime
 import csv
+import pandas as pd
 from dateutil import parser
 import pytz
 import logging
@@ -183,7 +184,9 @@ def main():
     fieldnames = ['sourceUser','reference', 'invoiceNumber','customerOrderNo','estimatedDeliveryDate','company', 'firstName', 'lastName', 'projectName', 
                   'channel', 'currencyCode','lineItemcode', 'lineItemName','lineItemQty','lineItemoption3', 'lineItemUnitPrice', 'lineItemDiscount', 'discountTotal','invoiceDate']
     
-    file_name = f"Sales_Orders_Fridays_{start_date.strftime('%Y%m%d')}_{end_date.strftime('%Y%m%d')}.csv"
+    file_name = f"Sales_Orders_Fridays_{start_date.strftime('%Y%m%d')}_{end_date.strftime('%Y%m%d')}.xlsx"
+
+    sheet_name = "Sales Orders"
 
    
        # Saves it in a temporal file 
@@ -191,6 +194,7 @@ def main():
     os.makedirs("tmp_files", exist_ok=True)
 
     all_sales_orders = []
+    
 
    # Process users in parallel
     with ThreadPoolExecutor(max_workers=4) as executor:
@@ -198,12 +202,20 @@ def main():
         for user_sales_orders in results:
             all_sales_orders.extend(user_sales_orders)
 
+    """
     # Write all sales orders to a single CSV file
     with open(output_filename, mode='w', newline='', encoding='utf-8') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
         for sales_orders in all_sales_orders:
             writer.writerow(sales_orders)
+    """
+
+    #Write to xlsx
+    df = pd.DataFrame(all_sales_orders, columns=fieldnames)
+
+    with pd.ExcelWrite(output_filename, engine="openpyxl") as writer:
+        df.to_excel(writer, sheet_name=sheet_name, index=False)
 
     logging.info(f"Data successfully written locally at {output_filename}")
 
