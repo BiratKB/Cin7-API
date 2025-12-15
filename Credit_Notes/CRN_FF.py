@@ -186,7 +186,7 @@ def main():
                   'firstName','lastName','projectName','channel','currencyCode','lineItemcode','lineItemName',
                   'lineItemQty','lineItemoption3','lineItemUnitPrice','lineItemDiscount','discountTotal','completedDate']
     
-    file_name = f"Credit_Notes_FF_{start_date.strftime('%Y%m%d')}_{end_date.strftime('%Y%m%d')}.csv"
+    file_name = f"Credit_Notes_FF_{start_date.strftime('%Y%m%d')}_{end_date.strftime('%Y%m%d')}.xlsx"
 
     sheet_name = "Credit Notes"
 
