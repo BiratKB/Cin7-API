@@ -214,7 +214,7 @@ def main():
     #Write to xlsx
     df = pd.DataFrame(all_sales_orders, columns=fieldnames)
 
-    with pd.ExcelWrite(output_filename, engine="openpyxl") as writer:
+    with pd.ExcelWriter(output_filename, engine="openpyxl") as writer:
         df.to_excel(writer, sheet_name=sheet_name, index=False)
 
     logging.info(f"Data successfully written locally at {output_filename}")
