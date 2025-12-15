@@ -4,6 +4,7 @@ import requests
 import base64
 import datetime
 import csv
+import pandas as pd
 from dateutil import parser
 import pytz
 import logging
@@ -187,6 +188,8 @@ def main():
     
     file_name = f"Credit_Notes_FF_{start_date.strftime('%Y%m%d')}_{end_date.strftime('%Y%m%d')}.csv"
 
+    sheet_name = "Credit Notes"
+
     #Save in temporal file
     output_filename = os.path.join("tmp_files", file_name)
     os.makedirs("tmp_files", exist_ok=True)
@@ -200,11 +203,19 @@ def main():
             all_credit_notes.extend(user_credit_notes)
 
     #All in 1 csv
+    """
     with open(output_filename, mode='w', newline='', encoding='utf-8') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
         for credit_note in all_credit_notes:
             writer.writerow(credit_note)
+    """
+
+    #Output to xlsx
+    df = pd.DataFrame(all_credit_notes, columns=fieldnames)
+
+    with pd.ExcelWriter(output_filename, engine="openpyxl") as writer:
+        df.to_excel(writer, sheet_name=sheet_name, index=False)
     
     logging.info(f"Data successfully written locally at {output_filename}")
 
