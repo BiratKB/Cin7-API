@@ -68,7 +68,7 @@ def parse_date(date_string):
         logging.warning(f"Failed to parse date: {date_string}. Error: {e}")
         return None
 
-#Define the date range
+#Define the date range :)
 def calculate_date_range():
     today = datetime.datetime.now(pytz.utc)
     start_date = datetime.datetime(2024, 1, 1, tzinfo=pytz.utc) ##YYYY, MM, DD, hhh, mm, ss

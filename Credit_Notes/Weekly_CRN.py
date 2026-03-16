@@ -99,7 +99,7 @@ def process_credit_note(credit_note, user_name):
         "AlbertRogerIberiEU": "ARIB"
     }
     
-    # Get the abbreviation for the user_name, or use the original if not found
+    # Get the abbreviation for the user_name, or use the original if not found :)
     abbreviated_user_name = user_abbreviations.get(user_name, user_name)
     
     results = []

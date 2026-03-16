@@ -178,7 +178,7 @@ def main():
                   'channel', 'currencyCode', 'lineItemcode', 'lineItemName','lineItemQty','lineItemoption3', 'lineItemUnitPrice', 'lineItemDiscount', 'discountTotal','completedDate']
     
     file_name = f"Credit_Notes_{start_date.strftime('%Y%m%d')}_{end_date.strftime('%Y%m%d')}.csv"
-# Saves it in a temporal file 
+# Saves it in a temporal file :)
     output_filename = os.path.join("tmp_files", file_name)
     os.makedirs("tmp_files", exist_ok=True)
 

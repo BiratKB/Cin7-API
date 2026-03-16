@@ -13,7 +13,7 @@ if not dropbox_url:
 filename = dropbox_url.split('/')[-1].split('?')[0]  # get last path part, remove query
 output_file = filename.replace('.xlsb', '.xlsx')
 
-# Download file
+# Download file :)
 r = requests.get(dropbox_url)
 r.raise_for_status()  # raise error if download failed
 

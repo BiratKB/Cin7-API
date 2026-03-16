@@ -206,7 +206,7 @@ def process_user(user):
     return all_sales_orders
 
 def main():
-    #Calculate last week range
+    #Calculate last week range :)
     start_date, end_date = calculate_date_range()
 
     fieldnames = [

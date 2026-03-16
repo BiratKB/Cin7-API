@@ -182,7 +182,7 @@ def main():
 
     all_credit_notes = []
 
-    # Process users in parallel
+    # Process users in parallel :)
     with ThreadPoolExecutor(max_workers=4) as executor:
         results = executor.map(process_user, USERS)
         for user_credit_notes in results:

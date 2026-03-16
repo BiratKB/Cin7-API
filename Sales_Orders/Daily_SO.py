@@ -91,7 +91,7 @@ def process_sales_orders(sales_orders, user_name):
     estimated_delivery_date = parse_date(sales_orders.get('estimatedDeliveryDate'))
     discount_total = sales_orders.get('discountTotal', 0)
 
-    # Create a dictionary to map full names to abbreviations
+    # Create a dictionary to map full names to abbreviations :)
     user_abbreviations = {
         "AlbertRogerUK": "ARL",
         "AlbertRogerNetheEU": "ARNL",

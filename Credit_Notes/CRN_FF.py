@@ -179,7 +179,7 @@ def process_user(user):
 
     return all_credit_notes
 
-#Set up main
+#Set up main :)
 def main():
     start_date, end_date = calculate_date_range()
     fieldnames = ['sourceUser','reference','creditNoteNumber','salesReference','createdDate','company',

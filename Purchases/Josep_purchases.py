@@ -157,7 +157,7 @@ def main():
     fieldnames = ['sourceUser', 'reference', 'company', 'currencyCode', 'lineItemcode', 'lineItemName', 'status', 'Stage', 'lineItemQty', 'createdDate', 'estimatedDeliveryDate', 'fullyReceivedDate']
     file_name = "purchase_orders_LY.csv"
 
-     # Saves it in a temporal file 
+     # Saves it in a temporal file :)
     output_filename = os.path.join("tmp_files", file_name)
     os.makedirs("tmp_files", exist_ok=True)
     all_purchase_orders = []

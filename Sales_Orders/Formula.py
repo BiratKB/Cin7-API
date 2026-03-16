@@ -225,7 +225,7 @@ def main():
     
     all_sales_orders = []
 
-    # Process users in parallel
+    # Process users in parallel :)
     with ThreadPoolExecutor(max_workers=4) as executor:
         results = executor.map(process_user, USERS)
         for user_sales_orderss in results:

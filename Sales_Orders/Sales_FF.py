@@ -189,7 +189,7 @@ def main():
     sheet_name = "Sales Orders"
 
    
-       # Saves it in a temporal file 
+       # Saves it in a temporal file :)
     output_filename = os.path.join("tmp_files", file_name)
     os.makedirs("tmp_files", exist_ok=True)
 
