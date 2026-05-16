@@ -2,10 +2,10 @@ name: Merge Cin7 Sales Files
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Runs daily at 08:00 UTC :)
+    - cron: '0 8 * * *'  # Runs daily at 08:00 UTC 
   workflow_dispatch:     # Allows manual trigger
 
-  #:)
+  #
 jobs:
   run-script:
     runs-on: ubuntu-latest

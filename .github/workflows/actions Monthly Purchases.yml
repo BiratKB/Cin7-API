@@ -3,7 +3,7 @@ name:  run Monthly_Purchases.py
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 7 1,2,3,4 * *' # At 04:00 on the first day of every month :)
+    - cron: '0 7 1,2,3,4 * *' # At 04:00 on the first day of every month 
 
 jobs:
   build:

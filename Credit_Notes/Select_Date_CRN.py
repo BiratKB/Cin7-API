@@ -22,7 +22,7 @@ ARIB_KEY = os.environ["ARIB_KEY"]
 ARNL_KEY = os.environ["ARNL_KEY"]
 ARF_KEY = os.environ["ARF_KEY"]
 
-# List of user credentials
+# List of user credential
 USERS = [
     {"username": "AlbertRogerUK", "key": ARL_KEY},
     {"username": "AlbertRogerFrancEU", "key": ARF_KEY},

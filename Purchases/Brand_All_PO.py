@@ -11,7 +11,7 @@ from concurrent.futures import ThreadPoolExecutor
 #All base requirements
 
 logging.basicConfig(level=logging.INFO,format='%(asctime)s - %(levelname)s - %(message)s')
-#Set up logging
+#Set up log
 
 #Config 
 BASE_URL = 'https://api.cin7.com/api/v1/PurchaseOrders'

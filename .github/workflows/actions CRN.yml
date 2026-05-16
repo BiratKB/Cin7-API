@@ -1,5 +1,5 @@
 name: run Weekly_CRN.py
-# :)
+# 
 on:
   workflow_dispatch:
   schedule:

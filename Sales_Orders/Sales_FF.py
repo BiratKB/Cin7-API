@@ -10,7 +10,7 @@ import logging
 import os
 from concurrent.futures import ThreadPoolExecutor
 
-#Set up logging
+#Set up loggs
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 #API config

@@ -262,7 +262,7 @@ def main():
     # Create DataFrame
     df = pd.DataFrame(all_sales_orders, columns=fieldnames)
     
-    # Apply classification function
+    # Apply classification functions
     df["Warehouse"] = df.apply(classify_entity, axis=1)
     
     # Save to Excel

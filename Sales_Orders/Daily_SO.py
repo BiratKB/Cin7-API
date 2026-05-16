@@ -233,7 +233,7 @@ def main():
     logging.info(f"Errores file written locally at {errores_filename}")
 
 
-# Export the EXACT path for the workflow
+# Export the EXACT path for the workflows
     gh_env = os.getenv('GITHUB_ENV')
     output_filename_abs = os.path.abspath(output_filename) 
     output_filename_base = os.path.basename(output_filename)

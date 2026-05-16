@@ -3,7 +3,7 @@ name:  run Daily_SO.py
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 3 * * 1,2,3,4,5,6' # At 03:00, Monday - Saturday (La hora depende de la localización del servidor) :)
+    - cron: '0 3 * * 1,2,3,4,5,6' # At 03:00, Monday - Saturday (La hora depende de la localización del servidor) 
 
 jobs:
   build:

@@ -88,7 +88,7 @@ def reset_tracker(user_name):
         }
 
 def main():
-    # Sample usage :)
+    # Sample usage 
     print("Starting the tracker script...")
 
     # Example of using specific usernames for tracking
