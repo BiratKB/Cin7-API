@@ -182,7 +182,7 @@ def process_user(user):
     WHERE = start_date <= createdDate <= end_date
 
     while True:
-        url = f'{BASE_URL}?fields={FIELDS}&page={page}&rows={ROWS_PER_PAGE}'
+        url = f'{BASE_URL}?fields={FIELDS}&where={WHERE}&page={page}&rows={ROWS_PER_PAGE}'
         logging.info(f"Fetching page {page} for user {user['username']}...")
 
         data, error = call_api(url, headers)
