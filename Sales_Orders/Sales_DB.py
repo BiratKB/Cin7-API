@@ -179,10 +179,9 @@ def process_user(user):
     start_date, end_date = calculate_date_range()
     all_sales_orders = []
     page = 1
-    WHERE = start_date <= createdDate <= end_date
 
     while True:
-        url = f'{BASE_URL}?fields={FIELDS}&where={WHERE}&page={page}&rows={ROWS_PER_PAGE}'
+        url = (f"{BASE_URL}"f"?fields={FIELDS}"f"&page={page}"f"&rows={ROWS_PER_PAGE}"f"&where = createdDate >= '{start_date}' AND createdDate <= '{end_date}'"
         logging.info(f"Fetching page {page} for user {user['username']}...")
 
         data, error = call_api(url, headers)
