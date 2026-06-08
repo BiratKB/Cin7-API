@@ -130,6 +130,7 @@ def calculate_date_range():
     end_dt = (this_monday - datetime.timedelta(seconds=1)).replace(hour=23, minute=59, second=59, microsecond=999999)
     return start_dt, end_dt
 
+
 #Check valid orders : no Void and created within last week 
 def is_valid_sales_orders(sales_orders, start_date, end_date):
     is_void = sales_orders.get('isVoid', False)
@@ -178,6 +179,7 @@ def process_user(user):
     start_date, end_date = calculate_date_range()
     all_sales_orders = []
     page = 1
+    WHERE = start_date <= createdDate <= end_date
 
     while True:
         url = f'{BASE_URL}?fields={FIELDS}&page={page}&rows={ROWS_PER_PAGE}'
