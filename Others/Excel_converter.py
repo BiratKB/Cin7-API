@@ -10,7 +10,7 @@ if not dropbox_url:
     raise Exception("INVOICING_BOOK_URL not set")
 
 # Extract filename from URL path and replace extension
-filename = dropbox_url.split('/')[-1].split('?')[0]  # get last path part, remove query
+filename = dropbox_url.split('/')[-1].split('?')[0]  # get last path part remove query
 output_file = filename.replace('.xlsb', '.xlsx')
 
 # Download file 

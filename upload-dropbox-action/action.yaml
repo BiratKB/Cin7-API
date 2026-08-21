@@ -1,6 +1,6 @@
 # https://www.dropbox.com/developers/documentation/http/documentation#files-upload
 name: Upload
-description: Upload a file to Dropbox
+description: Upload a file to Dropbox #functionality
 
 inputs:
   DROPBOX_APP_KEY:

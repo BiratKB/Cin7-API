@@ -30,7 +30,7 @@ def log_api_call(user_name):
         user = user_data[user_name]
 
         # Reset counters if limits exceeded
-        if now - user["last_reset"] >= 86400:  # Reset daily limit after 24 hours
+        if now - user["last_reset"] >= 86400:  # Reset daily limit after 24 hour
             user["api_calls"] = 0
             user["last_reset"] = now
 

@@ -69,7 +69,7 @@ def parse_date(date_string):
         logging.error(f"Unexpected error parsing data: {date_string}. Error: {e}")
         return None
     
-#Set date range wk
+#Set date range week
 def calculate_date_range():
     today = datetime.datetime.now(pytz.utc)
     start_dt = today - datetime.timedelta(days=7)

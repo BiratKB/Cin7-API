@@ -3,7 +3,7 @@ name:  run Daily_Purchases.py
 on:
   workflow_dispatch:
   schedule:
-    - cron: '45 4 * * 1-5' # At 04:00, Monday-Firday(La hora depende de la localización del servidor) 
+    - cron: '45 4 * * 1-5' # At 04:00, Monday-Firday(server time)
 
 jobs:
   build:

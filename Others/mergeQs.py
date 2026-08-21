@@ -3,7 +3,7 @@ import io
 import pandas as pd
 import requests
 
-# Get a new access token using the refresh toke
+# Get a new access token using the refresh token
 DROPBOX_CLIENT_ID = os.environ["DROPBOX_ALL_ACCESS_APP_KEY"]
 DROPBOX_CLIENT_SECRET = os.environ["DROPBOX_ALL_ACCESS_APP_SECRET"]
 DROPBOX_REFRESH_TOKEN = os.environ["DROPBOX_ALL_ACCESS_REFRESH_TOKEN"]

@@ -3,7 +3,7 @@ name: run Excel_converter.py
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 1 * * 6,0,1' # At 10:00 UTC on Saturday, Sunday, Monday 
+    - cron: '0 1 * * 6,0,1' # At 10:00 UTC on Saturday, Sunday, Mon 
 
 jobs:
   build:
