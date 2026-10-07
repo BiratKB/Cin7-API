@@ -186,8 +186,8 @@ def main():
     start_date, end_date = calculate_date_range()
     
     fieldnames = ['sourceUser','reference', 'invoiceNumber','customerOrderNo','estimatedDeliveryDate','company', 'firstName', 'lastName', 'projectName', 
-                  'channel', 'currencyCode','lineItemcode', 'lineItemName','lineItemQty','lineItemoption3', 'lineItemUnitPrice', 'lineItemDiscount', 'discountTotal','invoiceDate,'
-                  'taxStatus','total']
+                  'channel', 'currencyCode','lineItemcode', 'lineItemName','lineItemQty','lineItemoption3', 'lineItemUnitPrice', 'lineItemDiscount', 'discountTotal','invoiceDate'
+                  ,'taxStatus','total']
     
     file_name = f"Sales_Orders_Fridays_{start_date.strftime('%Y%m%d')}_{end_date.strftime('%Y%m%d')}.xlsx"
 
