@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 #API config
 BASE_URL = 'https://api.cin7.com/api/v1/SalesOrders'
 FIELDS = 'id, reference, customerOrderNo, salesReference, invoiceDate, estimatedDeliveryDate, company, firstName,' \
-'lastName, projectName, source, currencyCode, currencyRate, lineItems, discountTotal, completedDate, invoiceNumber'
+'lastName, projectName, source, currencyCode, currencyRate, lineItems, discountTotal, completedDate, invoiceNumber, taxStatus, total'
 ROWS_PER_PAGE = 250
 
 #Set user credentials
@@ -140,7 +140,9 @@ def process_sales_orders(sales_orders, user_name):
             'lineItemUnitPrice': adjusted_unit_price,
             'lineItemDiscount': adjusted_discount,
             'discountTotal': adjusted_discount_total,            
-            'invoiceDate': invoice_date.strftime('%d/%m/%Y') if invoice_date else ''
+            'invoiceDate': invoice_date.strftime('%d/%m/%Y') if invoice_date else '',
+            'taxStatus': sales_orders.get('taxStatus'),
+            'total': sales_orders.get('total')
 
         })
     
@@ -151,9 +153,11 @@ def process_user(user):
     start_date, end_date = calculate_date_range()
     all_sales_orders = []
     page = 1
+    start_str = start_date.strftime('%Y-%m-%dT%H:%M:%SZ')
+    end_str = end_date.strftime('%Y-%m-%dT%H:%M:%SZ')
 
     while True:
-        url = f'{BASE_URL}?fields={FIELDS}&page={page}&rows={ROWS_PER_PAGE}'
+        url = (f"{BASE_URL}"f"?fields={FIELDS}"f"&page={page}"f"&rows={ROWS_PER_PAGE}"f"&where=createdDate>='{start_str}' AND createdDate<='{end_str}'")
         logging.info(f"Fetching page {page} for user {user['username']}...")
 
         data, error = call_api(url, headers)
@@ -182,7 +186,8 @@ def main():
     start_date, end_date = calculate_date_range()
     
     fieldnames = ['sourceUser','reference', 'invoiceNumber','customerOrderNo','estimatedDeliveryDate','company', 'firstName', 'lastName', 'projectName', 
-                  'channel', 'currencyCode','lineItemcode', 'lineItemName','lineItemQty','lineItemoption3', 'lineItemUnitPrice', 'lineItemDiscount', 'discountTotal','invoiceDate']
+                  'channel', 'currencyCode','lineItemcode', 'lineItemName','lineItemQty','lineItemoption3', 'lineItemUnitPrice', 'lineItemDiscount', 'discountTotal','invoiceDate,'
+                  'taxStatus','total']
     
     file_name = f"Sales_Orders_Fridays_{start_date.strftime('%Y%m%d')}_{end_date.strftime('%Y%m%d')}.xlsx"
 
