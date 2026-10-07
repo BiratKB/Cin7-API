@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 #API config
 BASE_URL = 'https://api.cin7.com/api/v1/SalesOrders'
 FIELDS = 'id, reference, customerOrderNo, salesReference, invoiceDate, estimatedDeliveryDate, company, firstName,' \
-'lastName, projectName, source, currencyCode, currencyRate, lineItems, discountTotal, completedDate, invoiceNumber, taxStatus, total'
+'lastName, projectName, source, currencyCode, currencyRate, lineItems, discountTotal, completedDate, invoiceNumber, taxStatus, totalExcl, total'
 ROWS_PER_PAGE = 250
 
 #Set user credentials
@@ -142,7 +142,8 @@ def process_sales_orders(sales_orders, user_name):
             'discountTotal': adjusted_discount_total,            
             'invoiceDate': invoice_date.strftime('%d/%m/%Y') if invoice_date else '',
             'taxStatus': sales_orders.get('taxStatus'),
-            'total': sales_orders.get('total')
+            'totalExcl': sales_orders.get('totalExcl'),
+            'totalIncl': sales_orders.get('total')
 
         })
     
